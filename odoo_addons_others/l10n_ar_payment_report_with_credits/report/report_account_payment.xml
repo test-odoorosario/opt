@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_account_payment" inherit_id="l10n_ar_account_payment_report.report_account_payment">
+            <xpath expr="//t[@t-if='o.payment_imputation_ids']//h4//div//strong" position="replace">
+                <t t-if="not o.imputation_credit_ids">
+                    <strong>DOCUMENTOS IMPUTADOS</strong>
+                </t>
+                <t t-if="o.imputation_credit_ids">
+                    <strong>DÉBITOS</strong>
+                </t>
+            </xpath>
+            <xpath expr="//t[@t-foreach='o.payment_imputation_ids']" position="replace">
+                <t t-if="o.imputation_credit_ids" t-foreach="o.imputation_debit_ids" t-as="i">
+                    <tr>
+                        <td>
+                            <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').mapped('invoice_id').name_get()[0][1]"/>
+                            <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').name"/>
+                        </td>
+                        <td>
+                            <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').mapped('invoice_id').date_invoice,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                            <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').move_id.date,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount_total_in_payment_currency"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount_residual_in_payment_currency"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="not o.imputation_credit_ids" t-foreach="o.payment_imputation_ids" t-as="i">
+                    <tr>
+                        <td>
+                            <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').mapped('invoice_id').name_get()[0][1]"/>
+                            <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').name"/>
+                        </td>
+                        <td>
+                            <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').mapped('invoice_id').date_invoice,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                            <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').move_id.date,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount_total_in_payment_currency"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount_residual_in_payment_currency"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="i.amount"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+            <xpath expr="//t[@t-set='total_imputation']//.." position="replace">
+                <td t-if="o.imputation_credit_ids" class="text-right">
+                    <t t-set="total_imputation" t-value="sum(i.amount for i in o.imputation_debit_ids)"/>
+                    <span t-esc="total_imputation"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+                <td t-if="not o.imputation_credit_ids" class="text-right">
+                    <t t-set="total_imputation" t-value="sum(i.amount for i in o.payment_imputation_ids)"/>
+                    <span t-esc="total_imputation"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+            </xpath>
+            <xpath expr="//t[@t-if='o.payment_imputation_ids']" position="after">
+                <!-- Tabla de creditos imputados-->
+                <t t-if= "o.imputation_credit_ids">
+                    <br/>
+                    <h4>
+                        <div class="text-center">
+                            <strong>CRÉDITOS</strong>
+                        </div>
+                    </h4>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Documento imputado</th>
+                                <th>Fecha</th>
+                                <th class="text-right">Importe original</th>
+                                <th class="text-right">Restante</th>
+                                <th class="text-right">Asignacion</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <!-- CLIENTE -->
+                            <t t-foreach="o.imputation_credit_ids" t-as="i">
+                                <tr>
+                                    <td>
+                                        <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').mapped('invoice_id').name_get()[0][1]"/>
+                                        <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').name"/>
+                                    </td>
+                                    <td>
+                                        <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').mapped('invoice_id').date_invoice,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                                        <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').move_id.date,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="i.amount_total_in_payment_currency"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="i.amount_residual_in_payment_currency"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="i.amount"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-4 pull-right">
+                            <table class="table table-condensed">
+                                <tr class="border-black">
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-right">
+                                        <t t-set="total_credit_imputation" t-value="sum(i.amount for i in o.imputation_credit_ids)"/>
+                                        <span t-esc="total_credit_imputation"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</openerp>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <report
+            id="action_report_print_issued_check"
+            model="account.own.check"
+            string="Cheques propios"
+            report_type="qweb-pdf"
+            name="opyme_print_issued_check.report_print_issued_check"
+            file="opyme_print_issued_check.report_print_issued_check"
+        />
+
+        <record id="print_issued_check_paper_format" model="report.paperformat">
+            <field name="name">Impresion de cheques propios</field>
+            <field name="margin_top">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_spacing">0</field>
+        </record>
+
+        <record id="action_report_print_issued_check" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="print_issued_check_paper_format" />
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

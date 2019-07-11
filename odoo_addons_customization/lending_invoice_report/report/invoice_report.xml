@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+        <template id="lending_invoice_report">
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                    <div style="width:100%;text-align:left;">
+                        <h3>
+                            <div style="width:70%;float:left;display:inline-block;">
+                                Informe <strong><span t-field="o.lender_id.name"/></strong>
+                                sobre facturación de <span t-esc="o.get_period()"/> a
+                                <span t-field="o.customer_id.name"/>
+                            </div>
+                            <div style="text-align:right;width:30%;display:inline-block;">
+                                <strong>
+                                    <span t-field="o.date_today"/>
+                                </strong>
+                            </div>
+                        </h3>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div style="width:100%;text-align:left;">
+                        <h4>
+                            <strong>
+                                Detalle de débitos sobre facturas correspondientes
+                            </strong>
+                        </h4>
+                    </div>
+                    <t t-foreach="o.get_invoices()" t-as="invoice">
+                        <h4>
+                            <div style="width:100%;text-align:left;">
+                                Factura <strong><span t-field="invoice.name"/></strong>: $ <span t-esc="'{:,.2f}'.format(invoice.amount_total)"/><br/>
+                                No gravado: $ <span t-esc="'{:,.2f}'.format(invoice.amount_untaxed)"/><br/>
+                                Gravado: $ <span t-esc="'{:,.2f}'.format(invoice.amount_taxed)"/><br/>
+                                IIBB: $ <span t-esc="'{:,.2f}'.format(invoice.gross_income_amount)"/><br/>
+                                IVA: $ <span t-esc="'{:,.2f}'.format(invoice.vat_amount)"/>
+                            </div>
+                        </h4>
+                    </t>
+                    <br/>
+                    <div style="width:100%;text-align:left;">
+                        <h4>
+                            <u><strong>
+                                TOTAL FACTURAS <span t-esc="o.get_types_lots()"/>: $ <span t-esc="'{:,.2f}'.format(o.get_total())"/>
+                            </strong></u>
+                        </h4>
+                    </div>
+                    <t t-set="total_motive_debit" t-value="0"/>
+                    <t t-foreach="o.get_debit_motive()" t-as="motive">
+                        <div style="width:100%;text-align:left;">
+                            <t t-if="o.get_debit_motive_total(motive)">
+                                <div style="width:75%;float:left;display:inline-block;">
+                                    <h4><span t-field="motive.name"/></h4>
+                                </div>
+                                <div style="width:25%;display:inline-block;">
+                                    <h4>$ <span t-esc="'{:,.2f}'.format(o.get_debit_motive_total(motive))"/></h4>
+                                </div>
+                                <t t-set="total_motive_debit" t-value="total_motive_debit+o.get_debit_motive_total(motive)"/>
+                            </t>
+                        </div>
+                    </t>
+                    <br/>
+                    <br/>
+                    <div style="width:100%;text-align:left;">
+                        <h4>
+                            <strong><u>
+                                Total debito por vicio de forma según normas de auditoría médica
+                                $ <span t-esc="'{:,.2f}'.format(total_motive_debit)"/>
+                            </u></strong>
+                        </h4>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div style="width:100%;text-align:left;">
+                        <h4>
+                            <u>
+                                <strong>
+                                    TOTAL DEBITO:
+                                    $ <span t-esc="'{:,.2f}'.format(total_motive_debit)"/>
+                                </strong>
+                            </u>
+                        </h4>
+                    </div>
+                    <div style="width:100%;text-align:left;">
+                        <h4>
+                            <u>
+                                <strong>
+                                    TOTAL A PAGAR: $ <span t-esc="'{:,.2f}'.format(o.get_total()-total_motive_debit)"/>
+                                </strong>
+                            </u>
+                        </h4>
+                    </div>
+                    <br/>
+                    <t t-if="o.get_total()-total_motive_debit > 0">
+                        <div style="width:100%;text-align:left;">
+                            <h4>
+                                <u>
+                                    <strong>
+                                        SON: <span t-esc="o._build_num_to_string(o.get_total()-total_motive_debit)"/>
+                                    </strong>
+                                </u>
+                            </h4>
+                        </div>
+                    </t>
+                    <br/>
+                </t>
+            </div>
+        </template>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_debit_motive_form_view" model="ir.ui.view">
+            <field name="name">lending_debit_motive_form_view</field>
+            <field name="model">lending.debit.motive</field>
+            <field name="arch" type="xml">
+                <form string="Motivo de debito">
+                    <sheet>
+                        <h1>
+                            <field name="name" nolabel="1" placeholder="Nombre..."/>
+                        </h1>
+                        <group>
+                            <field name="code"/>
+                            <field name="percentage"/>
+                            <field name="is_re_invoice"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_debit_motive_tree_view" model="ir.ui.view">
+            <field name="name">lending_debit_motive_tree_view</field>
+            <field name="model">lending.debit.motive</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="percentage"/>
+                    <field name="is_re_invoice"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_debit_motive_action" model="ir.actions.act_window">
+            <field name="name">Motivo de debito</field>
+            <field name="res_model">lending.debit.motive</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_debit_motive_menu"
+            name="Motivo de debito"
+            action="lending_debit_motive_action"
+            parent="lending_config_menu"
+            sequence="105"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

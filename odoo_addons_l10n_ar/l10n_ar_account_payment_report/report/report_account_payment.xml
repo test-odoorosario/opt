@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--RETENTIONS-->
+        <template id="report_retentions_header">
+            <div class="header">
+                <div class="left">
+                    <img t-if="o.company_id.logo"
+                         t-att-src="'data:image/png;base64,%s' % o.company_id.logo"
+                         style="max-height: 45px;"/>
+                </div>
+                <div style="float:right">
+                    <strong>
+                        <t t-if="r.retention_id.type == 'gross_income'">
+                            Constancia de Retención IIBB
+                        </t>
+                        <t t-if="r.retention_id.type == 'vat'">
+                            Constancia de Retención IVA
+                        </t>
+                        <t t-if="r.retention_id.type == 'profit'">
+                            Constancia de Retención SICORE
+                        </t>
+                    </strong>
+                    <br/><br/>
+                    <div>
+                        <t t-if="r.certificate_no">
+                             Certificado N°: <span t-field="r.certificate_no"/>
+                        </t>
+                        <t t-if="o.payment_date">
+                             Fecha: <span t-field="o.payment_date"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="report_retentions_footer">
+            <div class="footer">
+                <div style="width: 90%, text-center">
+                    <t t-if="r.retention_id.type in ['profit', 'vat']">
+                        Declaro que los datos consignados en este Formulario son correctos y completos y
+                        que he confeccionado la presente utilizando mismo formato que la
+                        AFIP sin falsear dato alguno que deba contener, siendo fiel expresión de la verdad.
+                    </t>
+                    <t t-if="r.retention_id.type == 'gross_income'">
+                        La retención practicada mediante el presete certificado sera informada en la
+                        declaración jurada correspondiente al periodo
+                        <strong><span t-esc="datetime.datetime.strptime(o.payment_date,'%Y-%m-%d').strftime('%m/%Y')"/></strong>
+                    </t>
+
+                </div>
+            </div>
+        </template>
+        <template id="report_retentions_layout">
+            <t t-name="report.electronic_invoice_layout">
+                <t t-call="l10n_ar_account_payment_report.report_retentions_header"/>
+                <t t-raw="0"/>
+                <t t-call="l10n_ar_account_payment_report.report_retentions_footer"/>
+            </t>
+        </template>
+        <template id="report_retentions_body">
+            <div class="page">
+                <div style="width: 100%">
+                    <div class="left">
+                        <h4>
+                            <strong>A.- Datos del Agente de Retención</strong>
+                        </h4>
+                        <br/>
+                        <strong>Apellido y Nombre o Denominación: </strong>
+                        <span t-field="o.company_id.name"/>
+                        <br/>
+                        <strong>C.U.I.T N°: </strong>
+                        <span t-field="o.company_id.vat"/>
+                        <br/>
+                        <strong>Domicilio: </strong>
+                        <t t-if="o.company_id.street">
+                            Direccion:
+                            <span t-field="o.company_id.street"/>
+                        </t>
+                        <t t-if="o.company_id.city">
+                            Cuidad:
+                            <span t-field="o.company_id.city"/>
+                        </t>
+                        <br/><br/>
+                        <h4>
+                            <strong>B.- Datos del Sujeto Retenido</strong>
+                        </h4>
+                        <br/>
+                        <strong>Apellido y Nombre o Denominación: </strong>
+                        <span t-field="o.partner_id.name"/>
+                        <br/>
+                        <strong>C.U.I.T N°: </strong>
+                        <span t-field="o.partner_id.vat"/>
+                        <br/>
+                        <strong>Domicilio: </strong>
+                        <t t-if="o.partner_id.street">
+                            Direccion:
+                            <span t-field="o.partner_id.street"/>
+                        </t>
+                        <t t-if="o.partner_id.city">
+                            Cuidad:
+                            <span t-field="o.partner_id.city"/>
+                        </t>
+                        <br/><br/>
+                        <h4>
+                            <strong>C.- Datos de la Retención Practicada</strong>
+                        </h4>
+                        <br/>
+                        <strong>Impuesto: </strong>
+                        <span t-field="r.name"/>
+                        <br/>
+                        <t t-if="r.activity_id">
+                            <strong>Regimen: </strong>
+                            <span t-field="r.activity_id.name"/>
+                            <br/>
+                        </t>
+                        <strong>Comprobante que origina la Retención: </strong>
+                        <span t-field="o.name"/>
+                        <br/>
+                        <!-- ESTE CAMPO EN V8 ESTA EN EL MODELO DE RETENCIONES COMO EN ESTA VERSION NO EXISTE, -->
+                        <!-- LO DEJO COMENTADO POR LAS DUDAS -->
+                        <!--<strong>Notas: </strong>-->
+                        <!--<span t-field="o.notes"/>-->
+                        <!--<br/>-->
+                        <strong>Monto del Comprobante que origina la Retención: </strong>
+                        <span t-field="o.amount"
+                              t-options='{"widget": "monetary"}'
+                        />
+                        <br/>
+                        <t t-if="r.retention_id.type not in ['gross_income', 'profit', 'vat']">
+                            <strong>Base de cálculo: </strong>
+                            <span t-field="r.base"/>
+                            <br/>
+                        </t>
+                        <strong>Monto de la Retención: </strong>
+                        <span t-field="r.amount"
+                              t-options='{"widget": "monetary"}'
+                        />
+                        <br/>
+                        <strong>Imposibilidad de Retención:</strong>
+                        <br/><br/>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="report_retentions_template">
+            <t t-call="l10n_ar_account_payment_report.report_retentions_layout">
+                <t t-call="l10n_ar_account_payment_report.report_retentions_body"/>
+            </t>
+        </template>
+        <template id="report_payment_header" inherit_id="report.external_layout_header">
+            <xpath expr="//div//div[@name='company_address']//span" position="before">
+                <t t-if="company.partner_id.partner_document_type_id">
+                    <span t-field="company.partner_id.partner_document_type_id.name"/>:
+                </t>
+                <t t-if="company.partner_id.vat">
+                    <span t-field="company.partner_id.vat"/><br/>
+                </t>
+            </xpath>
+        </template>
+        <!--REPORTE DE PAGO + REPORTE DE RETENCIONES-->
+        <template id="report_account_payment">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+
+                        <h3 class="col-xs-offset-3">
+                            <span t-if="o.payment_type == 'inbound'">RECIBO N°</span>
+                            <span t-if="o.payment_type == 'outbound'">ORDEN DE PAGO N°</span>
+                            <span t-field="o.name"/>
+                        </h3>
+
+                        <div class="row">
+
+                            <div class="col-xs-5">
+                                <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                                <span t-field="o.partner_id.vat"/>
+                            </div>
+
+                            <div class="col-xs-2 col-xs-offset-5" t-if="o.payment_date">
+                                <strong><u>Fecha</u></strong>
+                                <p t-field="o.payment_date"
+                                   t-options='{"format": "dd/MM/yyyy"}'/>
+                            </div>
+
+                        </div>
+
+                        <!-- Tabla de documentos imputados -->
+                        <t t-if= "o.payment_imputation_ids">
+                            <br/>
+                            <h4>
+                                <div class="text-center">
+                                    <strong>DOCUMENTOS IMPUTADOS</strong>
+                                </div>
+                            </h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Documento imputado</th>
+                                        <th>Fecha</th>
+                                        <th class="text-right">Importe original</th>
+                                        <th class="text-right">Restante</th>
+                                        <th class="text-right">Asignacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <!-- CLIENTE -->
+                                    <t t-foreach="o.payment_imputation_ids" t-as="i">
+                                        <tr>
+                                            <td>
+                                                <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').mapped('invoice_id').name_get()[0][1]"/>
+                                                <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="i.mapped('move_line_id').name"/>
+                                            </td>
+                                            <td>
+                                                <span t-if="i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').mapped('invoice_id').date_invoice,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                                                <span t-if="not i.mapped('move_line_id').mapped('invoice_id')" t-esc="datetime.datetime.strptime(i.mapped('move_line_id').move_id.date,'%Y-%m-%d').strftime('%d/%m/%Y')"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="i.amount_total_in_payment_currency"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="i.amount_residual_in_payment_currency"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="i.amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr class="border-black">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <t t-set="total_imputation" t-value="sum(i.amount for i in o.payment_imputation_ids)"/>
+                                                <span t-esc="total_imputation"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Detalles de formas de pago -->
+                        <t t-if= "sum(l.amount for l in o.payment_type_line_ids) > 0">
+                            <br></br>
+                            <h4>
+                                <div class="text-center">
+                                    <strong>DETALLES DE FORMA DE PAGO</strong>
+                                </div>
+                            </h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Modo de pago</th>
+                                        <th>Fecha</th>
+                                        <th class="text-right">Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="o.payment_type_line_ids" t-as="l">
+                                        <t t-if="l.amount > 0">
+                                            <td>
+                                                <span t-field="l.account_payment_type_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.payment_date"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                       t-field="l.amount" />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr class="border-black">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <t t-set="total_payment_method" t-value="sum(payment.amount for payment in o.payment_type_line_ids)"/>
+                                                <span t-esc="total_payment_method"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Cheques -->
+                        <t t-if= "o.account_third_check_ids or o.account_third_check_sent_ids or o.account_own_check_line_ids">
+                            <br></br>
+                            <h4>
+                                <div class="text-center">
+                                    <strong>DETALLE DE CHEQUES</strong>
+                                </div>
+                            </h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Nro. de cheque</th>
+                                        <th>Banco</th>
+                                        <th>Fecha de emision</th>
+                                        <th>Fecha de pago</th>
+                                        <th class="text-right">Importe</th>
+                                    </tr>
+                                </thead>
+                                <t t-if="o.account_third_check_ids">
+                                    <t t-set="total_check" t-value="0"/>
+                                    <tbody class="invoice_tbody">
+                                        <tr t-foreach="o.account_third_check_ids" t-as="l">
+                                            <td>
+                                                <span t-field="l.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.bank_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.issue_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="not l.payment_date">
+                                                    <span t-field="l.issue_date"/>
+                                                </t>
+                                                <span t-field="l.payment_date"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                       t-field="l.amount" />
+                                                <t t-set="total_check" t-value="total_check+l.amount"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                                <t t-if="o.account_third_check_sent_ids">
+                                    <t t-set="total_check" t-value="0"/>
+                                    <tbody class="invoice_tbody">
+                                        <tr t-foreach="o.account_third_check_sent_ids" t-as="l">
+                                            <td>
+                                                <span t-field="l.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.bank_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.issue_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="not l.payment_date">
+                                                    <span t-field="l.issue_date"/>
+                                                </t>
+                                                <span t-field="l.payment_date"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                       t-field="l.amount" />
+                                                <t t-set="total_check" t-value="total_check+l.amount"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                                <t t-if="o.account_own_check_line_ids">
+                                    <t t-set="total_check" t-value="0"/>
+                                    <tbody class="invoice_tbody">
+                                        <tr t-foreach="o.account_own_check_line_ids" t-as="l">
+                                            <td>
+                                                <span t-field="l.own_check_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.own_check_id.bank_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="l.issue_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="not l.payment_date">
+                                                    <span t-field="l.issue_date"/>
+                                                </t>
+                                                <span t-field="l.payment_date"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                       t-field="l.amount" />
+                                                <t t-set="total_check" t-value="total_check+l.amount"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                            <div class="row">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr class="border-black">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <span t-esc="total_check"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Retenciones -->
+                        <t t-if= "o.retention_ids">
+                            <br></br>
+                            <h4>
+                                <div class="text-center">
+                                    <strong>DETALLE DE RETENCIONES</strong>
+                                </div>
+                            </h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de retención</th>
+                                        <th>Fecha</th>
+                                        <th>Número de certificado</th>
+                                        <th class="text-right">Importe</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="o.retention_ids" t-as="l">
+                                        <td>
+                                            <span t-field="l.retention_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.payment_date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.certificate_no"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                   t-field="l.amount" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr class="border-black">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <t t-set="total_ret" t-value="sum(ret.amount for ret in o.retention_ids)"/>
+                                                <span t-esc="total_ret"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- TOTAL PAGO-->
+                        <br></br>
+                        <div class="row">
+                            <div class="col-xs-4 pull-right">
+                                <table class="table table-condensed">
+                                    <tr class="border-black">
+                                        <td><strong>Total pagado</strong></td>
+                                        <td class="text-right">
+                                            <span  t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                   t-field="o.amount" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+                <t t-if="o.payment_type == 'outbound'">
+                    <t t-foreach="o.retention_ids" t-as="r">
+                        <t t-call="l10n_ar_account_payment_report.report_retentions_template"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

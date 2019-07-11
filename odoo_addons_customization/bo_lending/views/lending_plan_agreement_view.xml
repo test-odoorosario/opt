@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_plan_agreement_form" model="ir.ui.view">
+            <field name="name">lending_plan_agreement_form</field>
+            <field name="model">lending.plan.agreement</field>
+            <field name="arch" type="xml">
+                <form string="Plan/Convenio">
+                    <sheet>
+                        <h1>
+                            <field name="code" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="lending_plan_agreement_tree" model="ir.ui.view">
+            <field name="name">lending_plan_agreement_tree</field>
+            <field name="model">lending.plan.agreement</field>
+            <field name="arch" type="xml">
+                <tree string="Plan/Convenio">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_plan_agreement_search" model="ir.ui.view">
+            <field name="name">lending_plan_agreement_search</field>
+            <field name="model">lending.plan.agreement</field>
+            <field name="arch" type="xml">
+                <search string="Plan/Convenio">
+                    <field name="name"/>
+                    <field name="code"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_plan_agreement_action" model="ir.actions.act_window">
+            <field name="name">Plan/Convenio</field>
+            <field name="res_model">lending.plan.agreement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_plan_agreement_menu"
+            name="Plan/Convenio"
+            action="lending_plan_agreement_action"
+            parent="lending_config_menu"
+            sequence="60"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

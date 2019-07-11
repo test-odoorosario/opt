@@ -1,0 +1,10 @@
+{
+  "tests/test_mass_editing.py::TestMassEditing::test_mass_edit_copy": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_mass_edit_email": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_mass_edit_partner_title": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_onchange_model": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_sidebar_action": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_uninstall_hook": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_unlink_mass": true, 
+  "tests/test_mass_editing.py::TestMassEditing::test_wiz_fields_view_get": true
+}

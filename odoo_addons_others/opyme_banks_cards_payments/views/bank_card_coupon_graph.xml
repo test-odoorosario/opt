@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="bank_card_coupon_graph">
+            <field name="name">bank_card_coupon_graph</field>
+            <field name="model">bank.card.coupon</field>
+            <field name="arch" type="xml">
+                <graph string="Cupones" type="pivot">
+                    <field name="amount" type="measure"/>
+                    <field name="date" interval="month" type="row"/>
+                    <field name="bank_card_id" type="row"/>
+                    <field name="bank_card_fee_id" type="row"/>
+                    <field name="amount" type="row"/>
+                    <field name="state" type="row"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

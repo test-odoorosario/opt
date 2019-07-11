@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <record id="view_currency_rate_form" model="ir.ui.view">
+            <field name="name">view.currency.rate.form</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(opyme_currency_rate_wizard.currency_rate_wizard_action)d" string="Consultar tasa" type="action" attrs="{'invisible': [('active', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='rate']" position="after">
+                    <field name="inverse_rate"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_currency_rate_tree_view" model="ir.ui.view">
+            <field name="name">res_currency_rate_tree_view</field>
+            <field name="model">res.currency.rate</field>
+            <field name="inherit_id" ref="base.view_currency_rate_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='rate']" position="after">
+                    <field name="inverse_rate"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="res_currency_rate_form_view" model="ir.ui.view">
+            <field name="name">res_currency_rate_form_view</field>
+            <field name="model">res.currency.rate</field>
+            <field name="inherit_id" ref="base.view_currency_rate_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='rate']" position="after">
+                    <field name="inverse_rate"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

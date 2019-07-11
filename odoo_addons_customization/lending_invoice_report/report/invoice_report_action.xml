@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <report id="report_print"
+        string="Informe de facturas"
+        model="lending.invoice.report.wizard"
+        report_type="qweb-pdf"
+        file="lending_invoice_report.lending_invoice_report"
+        name="lending_invoice_report.lending_invoice_report"
+        />
+
+        <record id="invoice_report_paper_format" model="report.paperformat">
+            <field name="name">Papel facturas</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">10</field>
+            <field name="header_spacing">0</field>
+
+        </record>
+
+        <record id="report_print" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="invoice_report_paper_format"/>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

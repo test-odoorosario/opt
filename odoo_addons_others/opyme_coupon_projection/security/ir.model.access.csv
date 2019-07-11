@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_card_holidays_user","card_holidays_user","model_card_holidays","account.group_account_manager",1,1,1,1
+"access_close_coupon_wizard_user","close_coupon_wizard_user","model_close_coupon_wizard","account.group_account_manager",1,1,1,1
+"access_coupon_projection_report_user","coupon_projection_report_user","model_coupon_projection_report","opyme_coupon_projection.group_coupon_projection",1,1,1,1

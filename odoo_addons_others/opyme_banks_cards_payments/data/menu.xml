@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<openerp>
+    <data>
+        <menuitem
+            id="bank_card_parent_menu"
+            name="Tarjetas"
+            parent="l10n_ar_account_check.treasury_main_menu"
+            sequence="40"
+        />
+        <record id="bank_card_fee_action" model="ir.actions.act_window">
+            <field name="name">Cuotas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank.card.fee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click para crear una cuota.
+              </p>
+            </field>
+        </record>
+        <menuitem
+            id="bank_card_fee_menu"
+            name="Cuotas"
+            parent="opyme_banks_cards_payments.bank_card_parent_menu"
+            action="bank_card_fee_action"
+            sequence="10"
+        />
+        <record id="bank_card_action" model="ir.actions.act_window">
+            <field name="name">Tarjetas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank.card</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click para crear una tarjeta.
+              </p>
+            </field>
+        </record>
+        <menuitem
+            id="bank_card_menu"
+            name="Tarjetas"
+            parent="opyme_banks_cards_payments.bank_card_parent_menu"
+            action="bank_card_action"
+            sequence="20"
+        />
+        <record id="bank_card_coupon_action" model="ir.actions.act_window">
+            <field name="name">Cupones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank.card.coupon</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click para crear un cupon.
+              </p>
+            </field>
+        </record>
+        <menuitem
+            id="bank_card_coupon_menu"
+            name="Cupones"
+            parent="opyme_banks_cards_payments.bank_card_parent_menu"
+            action="bank_card_coupon_action"
+            sequence="30"
+        />
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

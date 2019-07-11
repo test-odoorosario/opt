@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data noupdate="1">
+
+        <record model="retention.retention.rule" id="ret_rule_ganancias_efectuada_78">
+            <field name="retention_id" ref="l10n_ar_retentions.retention_retention_ganancias_efectuada"/>
+            <field name="activity_id" ref="l10n_ar_retentions.ret_act_78"/>
+            <field name="not_applicable_minimum">100000</field>
+            <field name="minimum_tax">90</field>
+            <field name="percentage">2</field>
+            <field name="exclude_minimum">1</field>
+        </record>
+
+        <record model="retention.retention.rule" id="ret_rule_ganancias_efectuada_94">
+            <field name="retention_id" ref="l10n_ar_retentions.retention_retention_ganancias_efectuada"/>
+            <field name="activity_id" ref="l10n_ar_retentions.ret_act_94"/>
+            <field name="not_applicable_minimum">30000</field>
+            <field name="minimum_tax">90</field>
+            <field name="percentage">2</field>
+            <field name="exclude_minimum">1</field>
+        </record>
+
+        <record model="retention.retention.rule" id="ret_rule_ganancias_efectuada_27">
+            <field name="retention_id" ref="l10n_ar_retentions.retention_retention_ganancias_efectuada"/>
+            <field name="activity_id" ref="l10n_ar_retentions.ret_act_27"/>
+            <field name="not_applicable_minimum">5000</field>
+            <field name="minimum_tax">90</field>
+            <field name="percentage">6</field>
+            <field name="exclude_minimum">1</field>
+        </record>
+
+        <record model="retention.retention.rule" id="ret_rule_ganancias_efectuada_0">
+            <field name="retention_id" ref="l10n_ar_retentions.retention_retention_ganancias_efectuada"/>
+            <field name="activity_id" ref="l10n_ar_retentions.ret_act_0"/>
+            <field name="not_applicable_minimum">0</field>
+            <field name="minimum_tax">0</field>
+            <field name="percentage">0</field>
+            <field name="exclude_minimum">0</field>
+        </record>
+
+        <record model="retention.retention.rule" id="ret_rule_iibb_pba_efectuada_">
+            <field name="retention_id" ref="l10n_ar_retentions.retention_retention_iibb_pba_efectuada"/>
+            <field name="activity_id"/>
+            <field name="not_applicable_minimum">400</field>
+            <field name="minimum_tax">0</field>
+            <field name="percentage">0</field>
+            <field name="exclude_minimum">0</field>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

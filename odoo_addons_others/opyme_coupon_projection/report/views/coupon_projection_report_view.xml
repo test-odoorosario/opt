@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="coupon_projection_report_form_view" model="ir.ui.view">
+            <field name="name">coupon_projection_report_form_view</field>
+            <field name="model">coupon.projection.report</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <div class="alert alert-warning"
+                         role="alert"
+                         colspan="2">
+                        <span aria-hidden="true"/>
+                        <span><strong> Aviso</strong>:</span>
+                        <ul colspan="2">
+                            <li>
+                                Al generar la proyeccion solo tomara en cuenta los cupones
+                                en estado
+                                <strong>
+                                    PUBLICADO
+                                </strong>
+                                y al mismo tiempo se encuentren
+                                <strong>
+                                    CERRADOS
+                                </strong>.
+                            </li>
+                        </ul>
+                    </div>
+                    <footer>
+                        <button name="generate_report_xls"
+                                string="Generar proyeccion"
+                                type="object"
+                                class="oe_highlight"/>
+                        o
+                        <button string="cancelar"
+                                class="oe_link"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_coupon_projection_report" model="ir.actions.act_window">
+            <field name="name">Proyeccion de cupones</field>
+            <field name="res_model">coupon.projection.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_coupon_projection"
+                  name="Proyeccion de cupones"
+                  parent="opyme_banks_cards_payments.bank_card_parent_menu"
+                  action="action_coupon_projection_report"
+                  groups="opyme_coupon_projection.group_coupon_projection"
+                  sequence="40"/>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

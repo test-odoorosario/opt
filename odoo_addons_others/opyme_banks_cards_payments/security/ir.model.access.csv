@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+opyme_banks_cards_user,opyme_banks_cards_payments.bank_card.user,model_bank_card,base.group_user,1,0,0,0
+opyme_banks_card_fees_user,opyme_banks_cards_payments.bank_card_fee.user,model_bank_card_fee,base.group_user,1,0,0,0
+opyme_banks_cards_manager,opyme_banks_cards_payments.bank_card.manager,model_bank_card,l10n_ar_account_check.group_account_treasury_manager,1,1,1,1
+opyme_banks_card_fees_manager,opyme_banks_cards_payments.bank_card_fee.manager,model_bank_card_fee,l10n_ar_account_check.group_account_treasury_manager,1,1,1,1
+opyme_banks_cards_payments_bank_card_coupon_user,opyme_banks_cards_payments.bank_card_coupon.user,model_bank_card_coupon,base.group_user,1,0,0,0
+opyme_banks_cards_payments_bank_card_coupon_manager,opyme_banks_cards_payments.bank_card_coupon.manager,model_bank_card_coupon,account.group_account_manager,1,1,1,1

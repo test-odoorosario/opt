@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_invoice_report_wizard_view" model="ir.ui.view">
+            <field name="name">lending_invoice_report_wizard_view</field>
+            <field name="model">lending.invoice.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Reporte de facturas">
+                    <group>
+                        <group>
+                            <field name="lender_id"/>
+                            <field name="customer_id"/>
+
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="invoice_ids"
+                                   widget="many2many_tags"
+                                   attrs="{'invisible': ['|', '|', '|', ('date_from', '=', False), ('date_to', '=', False), ('lender_id', '=', False), ('customer_id', '=', False)]}"
+                                   edit="false"
+                                   create="false"
+                                   delete="false"
+                                   required="1"
+                            />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report_pdf"
+                                string="Generar pdf"
+                                type="object"
+                                class="oe_highlight"/>
+                        o
+                        <button name="cancel"
+                                string="Cancelar"
+                                class="oe_right oe_link"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="invoice_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Informe de facturas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">lending.invoice.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref ="lending_invoice_report_wizard_view"/>
+            <field name="target">new</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p><p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="invoice_report_wizard_menu"
+                  name="Informe de facturas"
+                  parent="bo_lending.lending_invoice_menu"
+                  action="lending_invoice_report.invoice_report_wizard_action"
+                  sequence="100"
+        />
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

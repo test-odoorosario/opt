@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+        <!--TREE-->
+        <record id="bank_card_coupon_tree" model="ir.ui.view">
+            <field name="name">bank_card_coupon_tree</field>
+            <field name="model">bank.card.coupon</field>
+            <field name="inherit_id" ref="opyme_banks_cards_payments.bank_card_coupon_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount']" position="after">
+                    <field name="estimated_amount"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="estimated_date"/>
+                    <field name="date_closed" invisible="1"/>
+                </xpath>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="colors">blue: state == 'draft'; gray: state in ('posted', 'sent', 'reconciled'); green: date_closed != False</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--FORM-->
+        <record id="bank_card_coupon_form" model="ir.ui.view">
+            <field name="name">bank_card_coupon_form</field>
+            <field name="model">bank.card.coupon</field>
+            <field name="inherit_id" ref="opyme_banks_cards_payments.bank_card_coupon_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount']" position="after">
+                    <field name="estimated_amount" attrs="{'invisible': [('estimated_amount', '=', 0)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="estimated_date" attrs="{'invisible': [('estimated_date', '=', False)]}"/>
+                    <field name="date_closed" attrs="{'invisible': [('date_closed', '=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

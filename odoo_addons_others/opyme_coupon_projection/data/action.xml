@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="action_close_coupon" model="ir.actions.act_window">
+            <field name="name">Cerrar cupon</field>
+            <field name="res_model">close.coupon.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="ir_close_coupon" model="ir.values">
+            <field name="name">ir.closed.coupon</field>
+            <field name="action_id" ref="action_close_coupon"/>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_close_coupon'))"/>
+            <field name="key">action</field>
+            <field name="model_id" ref="opyme_banks_cards_payments.model_bank_card_coupon"/>
+            <field name="model">bank.card.coupon</field>
+            <field name="key2">client_action_multi</field>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

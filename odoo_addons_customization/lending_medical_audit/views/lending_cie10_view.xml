@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_cie10_form_view" model="ir.ui.view">
+            <field name="name">lending_cie10_form_view</field>
+            <field name="model">lending.cie10</field>
+            <field name="arch" type="xml">
+                <form string="Cie10">
+                    <sheet>
+                        <h1>
+                            <field name="name" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_cie10_tree_view" model="ir.ui.view">
+            <field name="name">lending_cie10_tree_view</field>
+            <field name="model">lending.cie10</field>
+            <field name="arch" type="xml">
+                <tree string="Cie10">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_cie10_action" model="ir.actions.act_window">
+            <field name="name">Cie10</field>
+            <field name="res_model">lending.cie10</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_cie10_menu"
+            name="Cie10"
+            action="lending_cie10_action"
+            parent="bo_lending.lending_rate_menu"
+            groups="group_medical_audit"
+            sequence="150"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

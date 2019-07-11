@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_form" model="ir.ui.view">
+            <field name="name">lending_form</field>
+            <field name="model">lending</field>
+            <field name="arch" type="xml">
+                <form string="Prestacion">
+                    <sheet>
+                        <h1>
+                            <field name="code" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="module"/>
+                            </group>
+                            <group>
+                                <field name="has_coinsurance"/>
+                            </group>
+                        </group>
+                        <group string="Prestaciones" attrs="{'invisible': [('module', '=', False)]}">
+                            <field name="lending_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="lending_id"/>
+                                    <field name="no_included"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_tree" model="ir.ui.view">
+            <field name="name">lending_tree</field>
+            <field name="model">lending</field>
+            <field name="arch" type="xml">
+                <tree string="Prestaciones">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="module"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_search" model="ir.ui.view">
+            <field name="name">lending_search</field>
+            <field name="model">lending</field>
+            <field name="arch" type="xml">
+                <search string="Prestaciones">
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Nombre"/>
+                    <field name="module" string="Modulo"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_action" model="ir.actions.act_window">
+            <field name="name">Prestaciones</field>
+            <field name="res_model">lending</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[
+                       (5, 0, 0),
+                       (0, 0, {'view_mode': 'tree', 'view_id': ref('lending_tree')}),
+                       (0, 0, {'view_mode': 'form', 'view_id': ref('lending_form')}),
+                   ]"
+            />
+            <field name="search_view_id" ref="bo_lending.lending_search"/>
+            <field name="domain">[('medicine','=',False)]</field>
+        </record>
+
+        <menuitem
+            id="lending_menu"
+            name="Prestaciones"
+            action="lending_action"
+            parent="lending_rate_menu"
+            groups="bo_lending.group_rate"
+            sequence="50"
+        />
+
+        <!--MEDICAMENTOS-->
+        <record id="lending_medicine_form" model="ir.ui.view">
+            <field name="name">lending_medicine_form</field>
+            <field name="model">lending</field>
+            <field name="arch" type="xml">
+                <form string="Medicamento">
+                    <sheet>
+                        <h1>
+                            <field name="code" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="module"/>
+                                <field name="medicine"/>
+                            </group>
+                            <group>
+                                <field name="has_coinsurance"/>
+                            </group>
+                        </group>
+                        <group string="Prestaciones" attrs="{'invisible': [('module', '=', False)]}">
+                            <field name="lending_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="lending_id"/>
+                                    <field name="no_included"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_medicine_tree" model="ir.ui.view">
+            <field name="name">lending_medicine_tree</field>
+            <field name="model">lending</field>
+            <field name="arch" type="xml">
+                <tree string="Medicamentos">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="module"/>
+                    <field name="medicine"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_medicine_action" model="ir.actions.act_window">
+            <field name="name">Medicamentos</field>
+            <field name="res_model">lending</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('medicine','=',True)]</field>
+            <field name="view_ids"
+                   eval="[
+                       (5, 0, 0),
+                       (0, 0, {'view_mode': 'tree', 'view_id': ref('lending_medicine_tree')}),
+                       (0, 0, {'view_mode': 'form', 'view_id': ref('lending_medicine_form')}),
+                   ]"
+            />
+            <field name="search_view_id" ref="bo_lending.lending_search"/>
+        </record>
+
+        <menuitem
+            id="lending_medicine_menu"
+            name="Medicamentos"
+            action="lending_medicine_action"
+            parent="lending_rate_menu"
+            groups="bo_lending.group_rate"
+            sequence="51"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

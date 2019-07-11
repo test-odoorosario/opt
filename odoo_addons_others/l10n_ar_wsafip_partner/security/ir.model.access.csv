@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+l10n_ar_wsafip_partner_user,l10n_ar_wsafip_partner.wssrpadrona4_configuration.user,l10n_ar_wsafip_partner.model_wssrpadrona4_configuration,base.group_user,1,0,0,0
+l10n_ar_wsafip_partner_manager,l10n_ar_wsafip_partner.wssrpadrona4_configuration.manager,l10n_ar_wsafip_partner.model_wssrpadrona4_configuration,base.group_system,1,1,1,1

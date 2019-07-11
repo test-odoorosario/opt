@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data noupdate="1">
+
+    	<record id="codes_models_afip_res_country_bf" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.bf"/>
+            <field name="code">101</field>
+        </record>
+        <record id="codes_models_afip_res_country_ar" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ar"/>
+            <field name="code">200</field>
+        </record>
+        <record id="codes_models_afip_res_country_be" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.be"/>
+            <field name="code">406</field>
+        </record>
+        <record id="codes_models_afip_res_country_cz" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.cz"/>
+            <field name="code">451</field>
+        </record>
+        <record id="codes_models_afip_res_country_de" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.de"/>
+            <field name="code">438</field>
+        </record>
+        <record id="codes_models_afip_res_country_gr" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.gr"/>
+            <field name="code">413</field>
+        </record>
+        <record id="codes_models_afip_res_country_hk" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.hk"/>
+            <field name="code">341</field>
+        </record>
+        <record id="codes_models_afip_res_country_ie" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ie"/>
+            <field name="code">415</field>
+        </record>
+        <record id="codes_models_afip_res_country_il" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.il"/>
+            <field name="code">319</field>
+        </record>
+        <record id="codes_models_afip_res_country_it" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.it"/>
+            <field name="code">417</field>
+        </record>
+        <record id="codes_models_afip_res_country_jp" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.jp"/>
+            <field name="code">320</field>
+        </record>
+        <record id="codes_models_afip_res_country_jo" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.jo"/>
+            <field name="code">158</field>
+        </record>
+        <record id="codes_models_afip_res_country_lu" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.lu"/>
+            <field name="code">421</field>
+        </record>
+        <record id="codes_models_afip_res_country_mu" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.mu"/>
+            <field name="code">128</field>
+        </record>
+        <record id="codes_models_afip_res_country_mx" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.mx"/>
+            <field name="code">218</field>
+        </record>
+        <record id="codes_models_afip_res_country_nl" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.nl"/>
+            <field name="code">423</field>
+        </record>
+        <record id="codes_models_afip_res_country_nz" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.nz"/>
+            <field name="code">505</field>
+        </record>
+        <record id="codes_models_afip_res_country_ph" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ph"/>
+            <field name="code">312</field>
+        </record>
+        <record id="codes_models_afip_res_country_pl" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.pl"/>
+            <field name="code">424</field>
+        </record>
+        <record id="codes_models_afip_res_country_ru" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ru"/>
+            <field name="code">444</field>
+        </record>
+        <record id="codes_models_afip_res_country_sa" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.sa"/>
+            <field name="code">302</field>
+        </record>
+        <record id="codes_models_afip_res_country_si" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.si"/>
+            <field name="code">449</field>
+        </record>
+        <record id="codes_models_afip_res_country_ch" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ch"/>
+            <field name="code">430</field>
+        </record>
+        <record id="codes_models_afip_res_country_tr" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.tr"/>
+            <field name="code">436</field>
+        </record>
+        <record id="codes_models_afip_res_country_uk" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.uk"/>
+            <field name="code">426</field>
+        </record>
+        <record id="codes_models_afip_res_country_us" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.us"/>
+            <field name="code">212</field>
+        </record>
+        <record id="codes_models_afip_res_country_pe" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.pe"/>
+            <field name="code">222</field>
+        </record>
+        <record id="codes_models_afip_res_country_do" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.do"/>
+            <field name="code">209</field>
+        </record>
+        <record id="codes_models_afip_res_country_uy" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.uy"/>
+            <field name="code">225</field>
+        </record>
+        <record id="codes_models_afip_res_country_br" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.br"/>
+            <field name="code">203</field>
+        </record>
+        <record id="codes_models_afip_res_country_cl" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.cl"/>
+            <field name="code">208</field>
+        </record>
+        <record id="codes_models_afip_res_country_bo" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.bo"/>
+            <field name="code">202</field>
+        </record>
+        <record id="codes_models_afip_res_country_ec" model="codes.models.relation">
+            <field name="name">Afip</field>
+            <field name="name_model">res.country</field>
+            <field name="id_model" ref="base.ec"/>
+            <field name="code">210</field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

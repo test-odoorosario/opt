@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="close_coupon_wizard_form_view" model="ir.ui.view">
+            <field name="name">close_coupon_wizard_form_view</field>
+            <field name="model">close.coupon.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Cerrar cupones">
+                    <group>
+                        <group colspan="4"
+                                attrs="{'invisible': [('configuration_hour_projection', '=', False)]}">
+                            <div class="alert alert-warning"
+                                 role="alert"
+                                 colspan="2">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"/>
+                                <span><strong> Aviso</strong>:</span>
+                                <ul colspan="2">
+                                    <li>
+                                        Si el horario es mayor a
+                                        <strong>
+                                            <field name="configuration_hour_projection" readonly="1"/>
+                                        </strong> por favor ponga una fecha posterior a la de hoy.
+                                        (Siempre y cuando la fecha posterior no sea fin de semana ni feriado)
+                                    </li>
+                                </ul>
+                            </div>
+                        </group>
+                        <group>
+                            <!--<field name="configuration_hour_projection" invisible="1"/>-->
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button type="object"
+                                name="close_coupon"
+                                string="Cerrar cupones"
+                                class="oe_highlight"/>
+                        o
+                        <button class="oe_link"
+                                special="cancel"
+                                string="cancelar"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

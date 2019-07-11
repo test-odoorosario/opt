@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <!-- FORM ESTANDAR -->
+        <record model="ir.ui.view" id="own_check_reconcile_form">
+            <field name="name">own.check.reconcile.form</field>
+            <field name="model">own.check.reconcile</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="confirm" states="draft" string="Confirmar" type="object" class="oe_highlight"
+                                groups="l10n_ar_account_check.group_account_treasury_manager"/>
+                        <button name="cancel" states="confirmed" string="Cancelar" type="object" class="oe_link"
+                                groups="l10n_ar_account_check.group_account_treasury_manager"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="move_id" attrs="{'invisible': [('move_id', '=', False)]}"/>
+                                <field name="general_account_id" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" required="True"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="company_id" groups="base.group_multi_company"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                            <tree editable="bottom">
+                                <field name="check_id"/>
+                                <field name="check_account_id"/>
+                                <field name="account_id" required="True"/>
+                                <field name="amount" readonly="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" options="{&quot;thread_level&quot;: 1}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- FORM QUE SE MUESTRA AL CONCILIAR DESDE LA TREE DE CHEQUES PROPIOS -->
+        <record model="ir.ui.view" id="own_check_reconcile_popup_form">
+            <field name="name">own.check.reconcile.popup.form</field>
+            <field name="model">own.check.reconcile</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="move_id" invisible="1"/>
+                            <field name="general_account_id"/>
+                        </group>
+                        <group>
+                            <field name="journal_id" required="True"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <tree create="false" editable="bottom">
+                            <field name="check_id" readonly="True"/>
+                            <field name="check_account_id"/>
+                            <field name="account_id" required="True"/>
+                            <field name="amount" readonly="1"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                        <button string="Cancelar" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="own_check_reconcile_tree">
+            <field name="name">own.check.reconcile.tree</field>
+            <field name="model">own.check.reconcile</field>
+            <field name="arch" type="xml">
+                <tree delete="false"
+                      decoration-info="state=='draft'"
+                      decoration-muted="state=='canceled'"
+                      decoration-success="state=='confirmed'">
+                    <field name="date"/>
+                    <field name="journal_id"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="own_check_reconcile_action">
+            <field name="name">Conciliaciones</field>
+            <field name="res_model">own.check.reconcile</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="own_check_reconcile_menu"
+                name="Conciliaciones"
+                parent="l10n_ar_account_check.treasury_own_checks_main_menu"
+                action="own_check_reconcile_action"
+                sequence="55"
+        />
+
+    </data>
+</openerp>
+
+        <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

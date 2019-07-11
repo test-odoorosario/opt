@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_res_currency_rate_cash_flow_user,res_currency_rate_cash_flow,model_res_currency_rate_cash_flow,base.group_user,1,0,0,0
+access_res_currency_rate_cash_flow_manager,res_currency_rate_cash_flow_manager,model_res_currency_rate_cash_flow,base.group_multi_currency,1,1,1,1

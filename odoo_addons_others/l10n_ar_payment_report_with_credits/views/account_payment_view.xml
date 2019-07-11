@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="payment_imputation_form">
+            <field name="name">Payment imputation form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="l10n_ar_payment_imputation.payment_imputation_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_imputation_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '!=', 'draft')], 'invisible': [('imputation_credit_ids', '!=', [])]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_imputation_ids']" position="after">
+                    <separator string="Débitos" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}"/>
+                    <field name="imputation_debit_ids" colspan="2" attrs="{'readonly': [('imputation_credit_ids', '!=', [])], 'invisible': [('imputation_credit_ids', '=', [])]}" nolabel="1">
+                        <tree
+                            editable="bottom" create="false"
+                            decoration-info="amount &gt; 0 and amount &lt; amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-muted="amount == 0 and payment_state =='draft'"
+                            decoration-success="amount == amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-danger="amount &gt; amount_residual_in_payment_currency and payment_state =='draft'"
+                        >
+                            <field name="name"/>
+                            <field name="move_line_id" invisible="1"/>
+                            <field name="invoice_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="payment_currency_id" invisible="1"/>
+                            <field name="payment_state" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="amount_residual_in_payment_currency" string="Restante"/>
+                            <field name="amount_total_in_payment_currency" string="Total"/>
+                            <field name="amount_residual" string="Restante moneda comprobante"/>
+                            <field name="amount_total" string="Total moneda comprobante"/>
+                            <field name="concile"/>
+                        </tree>
+                    </field>
+                    <separator string="Créditos" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}"/>
+                    <field name="imputation_credit_ids" colspan="2" readonly="1" attrs="{'readonly': [('imputation_credit_ids', '!=', [])], 'invisible': [('imputation_credit_ids', '=', [])]}" nolabel="1">
+                        <tree
+                            editable="bottom" create="false"
+                            decoration-info="amount &gt; 0 and amount &lt; amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-muted="amount == 0 and payment_state =='draft'"
+                            decoration-success="amount == amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-danger="amount &gt; amount_residual_in_payment_currency and payment_state =='draft'"
+                        >
+                            <field name="name"/>
+                            <field name="move_line_id" invisible="1"/>
+                            <field name="invoice_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="payment_currency_id" invisible="1"/>
+                            <field name="payment_state" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="amount_residual_in_payment_currency" string="Restante"/>
+                            <field name="amount_total_in_payment_currency" string="Total"/>
+                            <field name="amount_residual" string="Restante moneda comprobante"/>
+                            <field name="amount_total" string="Total moneda comprobante"/>
+                            <field name="concile"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="payment_invoice_imputation_form">
+            <field name="name">Payment invoice imputation form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="l10n_ar_payment_imputation.payment_invoice_imputation_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_imputation_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '!=', 'draft')], 'invisible': [('imputation_credit_ids', '!=', [])]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_imputation_ids']" position="after">
+                    <separator string="Débitos" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}"/>
+                    <field name="imputation_debit_ids" colspan="2" readonly="1" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}" nolabel="1">
+                        <tree
+                            editable="bottom" create="false"
+                            decoration-info="amount &gt; 0 and amount &lt; amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-muted="amount == 0 and payment_state =='draft'"
+                            decoration-success="amount == amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-danger="amount &gt; amount_residual_in_payment_currency and payment_state =='draft'"
+                        >
+                            <field name="name"/>
+                            <field name="move_line_id" invisible="1"/>
+                            <field name="invoice_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="payment_currency_id" invisible="1"/>
+                            <field name="payment_state" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="amount_residual_in_payment_currency" string="Restante"/>
+                            <field name="amount_total_in_payment_currency" string="Total"/>
+                            <field name="amount_residual" string="Restante moneda comprobante"/>
+                            <field name="amount_total" string="Total moneda comprobante"/>
+                            <field name="concile"/>
+                        </tree>
+                    </field>
+                    <separator string="Créditos" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}"/>
+                    <field name="imputation_credit_ids" colspan="2" readonly="1" attrs="{'invisible': [('imputation_credit_ids', '=', [])]}" nolabel="1">
+                        <tree
+                            editable="bottom" create="false"
+                            decoration-info="amount &gt; 0 and amount &lt; amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-muted="amount == 0 and payment_state =='draft'"
+                            decoration-success="amount == amount_residual_in_payment_currency and payment_state =='draft'"
+                            decoration-danger="amount &gt; amount_residual_in_payment_currency and payment_state =='draft'"
+                        >
+                            <field name="name"/>
+                            <field name="move_line_id" invisible="1"/>
+                            <field name="invoice_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="payment_currency_id" invisible="1"/>
+                            <field name="payment_state" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="amount_residual_in_payment_currency" string="Restante"/>
+                            <field name="amount_total_in_payment_currency" string="Total"/>
+                            <field name="amount_residual" string="Restante moneda comprobante"/>
+                            <field name="amount_total" string="Total moneda comprobante"/>
+                            <field name="concile"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_lender_form" model="ir.ui.view">
+            <field name="name">lending_lender_form</field>
+            <field name="model">lending.lender</field>
+            <field name="arch" type="xml">
+                <form string="Prestador">
+                    <sheet>
+                        <h1>
+                            <field name="code" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <field name="is_child" invisible="1"/>
+                        <div attrs="{'invisible': [('is_child', '!=', False)]}">
+                            <field name="is_parent" class="oe_edit_only oe_inline"/><label for="is_parent" class="oe_edit_only"/>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="Planes">
+                                <group>
+                                    <field name="plan_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="code"/>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Categorias">
+                                <group>
+                                    <field name="category_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Prestadores" attrs="{'invisible': [('is_parent', '=', False)]}">
+                                <group>
+                                    <field name="child_ids" nolabel="1">
+                                        <tree>
+                                            <field name="code"/>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Tarifarios">
+                                <group>
+                                    <field name="rate_ids" nolabel="1" readonly="1">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="customer_id"/>
+                                            <field name="lender_id"/>
+                                            <field name="date"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Lotes">
+                                <group>
+                                    <field name="lot_ids" nolabel="1" readonly="1">
+                                        <tree>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="lending_lender_tree" model="ir.ui.view">
+            <field name="name">lending_lender_tree</field>
+            <field name="model">lending.lender</field>
+            <field name="arch" type="xml">
+                <tree string="Prestadores">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_lender_search" model="ir.ui.view">
+            <field name="name">lending_lender_search</field>
+            <field name="model">lending.lender</field>
+            <field name="arch" type="xml">
+                <search string="Prestador">
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Nombre"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_lender_action" model="ir.actions.act_window">
+            <field name="name">Prestador</field>
+            <field name="res_model">lending.lender</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_lender_menu"
+            name="Prestadores"
+            action="lending_lender_action"
+            parent="lending_invoice_menu"
+            groups="bo_lending.group_rate"
+            sequence="40"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

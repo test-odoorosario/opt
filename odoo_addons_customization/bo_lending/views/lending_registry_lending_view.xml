@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_registry_lending_form" model="ir.ui.view">
+            <field name="name">lending_registry_lending_form</field>
+            <field name="model">lending.registry.lending</field>
+            <field name="arch" type="xml">
+                <form string="Registro de prestacion">
+                    <sheet>
+
+                        <group string="Relaciones">
+                            <field name="lot_id"/>
+                            <field name="lender_id"/>
+                            <field name="affiliate_id"/>
+                            <field name="affiliate_vat" readonly="1"/>
+                            <field name="re_invoice_id"/>
+                        </group>
+                        <group string="Información general">
+                            <field name="date" required="1"/>
+                            <field name="lending_id" attrs="{'required': ['|', ('code', '=', False), ('medicine_id', '=', False)]}" context="{'date': date, 'lender_id': lender_id}"/>
+                            <field name="code" readonly="1" context="{'readonly_by_pass': True}"/>
+                            <field name="medicine_id" attrs="{'required': ['|', ('code', '=', False), ('lending_id', '=', False)]}"/>
+                            <field name="description"/>
+                        </group>
+                        <group string="Valores">
+                            <field name="informed_value"/>
+                            <field name="rate_value"/>
+                            <field name="debit"/>
+                        </group>
+                        <group string="Debito">
+                            <field name="debit_motive_ids" widget="many2many_tags"/>
+                            <field name="no_debit"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="lending_registry_lending_tree" model="ir.ui.view">
+            <field name="name">lending_registry_lending_tree</field>
+            <field name="model">lending.registry.lending</field>
+            <field name="arch" type="xml">
+                <tree string="Registros de prestaciones"
+                      decoration-success="no_debit"
+                      decoration-danger="debit_motive_ids"
+                      delete="false">
+                    <field name="code"/>
+                    <field name="lending_id"/>
+                    <field name="medicine_id"/>
+                    <field name="description"/>
+                    <field name="date"/>
+                    <field name="lot_id"/>
+                    <field name="lender_id"/>
+                    <field name="affiliate_id"/>
+                    <field name="affiliate_vat"/>
+                    <field name="re_invoice_id"/>
+                    <field name="informed_value"/>
+                    <field name="rate_value"/>
+                    <field name="debit_motive_ids" widget="many2many_tags"/>
+                    <field name="debit"/>
+                    <field name="total_to_pay"/>
+                    <field name="no_debit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_registry_lending_search" model="ir.ui.view">
+            <field name="name">lending_registry_lending_search</field>
+            <field name="model">lending.registry.lending</field>
+            <field name="arch" type="xml">
+                <search string="Registro de prestacion">
+                    <field name="code"/>
+                    <field name="lending_id"/>
+                    <field name="description"/>
+                    <field name="date"/>
+                    <field name="lot_id"/>
+                    <field name="lender_id"/>
+                    <field name="affiliate_id"/>
+                    <field name="affiliate_vat"/>
+                    <field name="re_invoice_id"/>
+                    <field name="informed_value"/>
+                    <field name="rate_value"/>
+                    <field name="debit"/>
+                    <field name="total_to_pay"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_registry_lending_pivot" model="ir.ui.view">
+            <field name="name">lending_registry_lending_pivot</field>
+            <field name="model">lending.registry.lending</field>
+            <field name="arch" type="xml">
+                <pivot string="Registro de prestacion">
+                    <field name="date" type="row"/>
+                    <field name="code" type="row"/>
+                    <field name="lending_id" type="row"/>
+                    <field name="lender_id" type="row"/>
+                    <field name="lot_id" type="row"/>
+                    <field name="re_invoice_id" type="row"/>
+                    <field name="informed_value" type="measure"/>
+                    <field name="rate_value" type="measure"/>
+                    <field name="debit" type="measure"/>
+                    <field name="total_to_pay" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="lending_registry_lending_action" model="ir.actions.act_window">
+            <field name="name">Registro de prestacion</field>
+            <field name="res_model">lending.registry.lending</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+        </record>
+
+        <menuitem
+            id="lending_registry_lending_menu"
+            name="Registros de prestaciones"
+            action="lending_registry_lending_action"
+            parent="lending_invoice_menu"
+            sequence="20"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

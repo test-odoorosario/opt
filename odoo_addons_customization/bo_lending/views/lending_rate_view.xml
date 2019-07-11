@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_rate_form_view" model="ir.ui.view">
+            <field name="name">lending_rate_form_view</field>
+            <field name="model">lending.rate</field>
+            <field name="arch" type="xml">
+                <form string="Tarifario">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="customer_id"/>
+                                <field name="lender_id"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="end_date"/>
+                                <field name="qty_expiration_days"/>
+                                <field name="qty_liquidation_days"/>
+                            </group>
+                        </group>
+                        <group string="Lineas">
+                            <field name="line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="lending_id"/>
+                                    <field name="code_range"/>
+                                    <field name="lender_code"/>
+                                    <field name="description"/>
+                                    <field name="plan_ids" widget="many2many_tags"/>
+                                    <field name="category_ids" widget="many2many_tags"/>
+                                    <field name="no_agreed"/>
+                                    <field name="nomenclator_id"/>
+                                    <field name="calculation_type" attrs="{'invisible': [('nomenclator_id', '=', False)], 'required': [('nomenclator_id', '!=', False)]}"/>
+                                    <field name="value_galeno" attrs="{'readonly': [('calculation_type', '!=', 'galeno_expense')], 'required': [('calculation_type', '=', 'galeno_expense')]}"/>
+                                    <field name="value"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="lending_id"/>
+                                            <field name="code_range"/>
+                                            <field name="lender_code"/>
+                                            <field name="no_agreed"/>
+                                        </group>
+                                        <group>
+                                            <field name="description"/>
+                                            <field name="nomenclator_id"/>
+                                            <field name="calculation_type" attrs="{'invisible': [('nomenclator_id', '=', False)], 'required': [('nomenclator_id', '!=', False)]}"/>
+                                            <field name="value_galeno" attrs="{'readonly': [('calculation_type', '!=', 'galeno_expense')], 'required': [('calculation_type', '=', 'galeno_expense')]}"/>
+                                            <field name="value"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_rate_tree_view" model="ir.ui.view">
+            <field name="name">lending_rate_tree_view</field>
+            <field name="model">lending.rate</field>
+            <field name="arch" type="xml">
+                <tree string="Tarifarios">
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                    <field name="lender_id"/>
+                    <field name="date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="lending_rate_search" model="ir.ui.view">
+            <field name="name">lending_rate_search</field>
+            <field name="model">lending.rate</field>
+            <field name="arch" type="xml">
+                <search string="Tarifario">
+                    <field name="name"/>
+                    <field name="lender_id"/>
+                    <field name="customer_id"/>
+                    <field name="date"/>
+                    <field name="end_date"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="lending_rate_action" model="ir.actions.act_window">
+            <field name="name">Tarifario</field>
+            <field name="res_model">lending.rate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_rate_submenu"
+            name="Tarifarios"
+            action="lending_rate_action"
+            parent="lending_rate_menu"
+            sequence="70"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

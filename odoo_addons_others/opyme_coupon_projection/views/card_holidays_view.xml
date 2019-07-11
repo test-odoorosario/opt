@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <!--FORM-->
+        <record id="card_holidays_form_view" model="ir.ui.view">
+            <field name="name">card_holidays_form_view</field>
+            <field name="model">card.holidays</field>
+            <field name="arch" type="xml">
+                <form string="Feriado">
+                    <sheet>
+                        <group string="Feriado">
+                            <group>
+                                <field name="name"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--TREE-->
+        <record id="card_holidays_tree_view" model="ir.ui.view">
+            <field name="name">card_holidays_tree_view</field>
+            <field name="model">card.holidays</field>
+            <field name="arch" type="xml">
+                <tree string="Feriados">
+                    <field name="name"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+        <!--KANBAN-->
+        <record model="ir.ui.view" id="card_holidays_kanban_view">
+            <field name="name">card_holidays_kanban_view</field>
+            <field name="model">card.holidays</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!--ACTION-->
+        <record id="action_card_holidays" model="ir.actions.act_window">
+            <field name="name">Feriados</field>
+            <field name="res_model">card.holidays</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" eval="card_holidays_kanban_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click aqui para crear un feriado.
+                </p>
+            </field>
+        </record>
+        <!--MENU-->
+        <menuitem id="menu_discount_list"
+                  name="Feriados"
+                  parent="opyme_banks_cards_payments.bank_card_parent_menu"
+                  action="action_card_holidays"
+                  sequence="100"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

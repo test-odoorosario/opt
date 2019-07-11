@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+
+
+        <record id="lending_rate_line_form" model="ir.ui.view">
+            <field name="name">lending_rate_line_form</field>
+            <field name="model">lending.rate.line</field>
+            <field name="arch" type="xml">
+                <form string="Tarifario">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="lending_id"/>
+                                <field name="code_range"/>
+                            </group>
+                            <group>
+                                <field name="lender_code"/>
+                                <field name="description"/>
+                                <field name="no_agreed"/>
+                            </group>
+                            <group>
+                                <field name="nomenclator_id"/>
+                                <field name="calculation_type" attrs="{'required': [('nomenclator_id', '!=', False)]}"/>
+                                <field name="value"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="plans" string="Planes">
+                                <group>
+                                    <field name="plan_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="code"/>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="categories" string="Categorias">
+                                <group>
+                                    <field name="category_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_rate_line_tree" model="ir.ui.view">
+            <field name="name">lending_rate_line_tree</field>
+            <field name="model">lending.rate.line</field>
+            <field name="arch" type="xml">
+                <tree string="Tarifarios">
+                    <field name="lending_id"/>
+                    <field name="code_range"/>
+                    <field name="lender_code"/>
+                    <field name="description"/>
+                    <field name="plan_ids" widget="many2many_tags"/>
+                    <field name="category_ids" widget="many2many_tags"/>
+                    <field name="calculation_type"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

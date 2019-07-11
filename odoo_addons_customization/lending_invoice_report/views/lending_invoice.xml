@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <record id="lending_invoice_difference_msg_form" model="ir.ui.view">
+            <field name="name">lending.invoice.difference.msg.form</field>
+            <field name="model">lending.invoice</field>
+            <field name="inherit_id" ref="bo_lending.lending_invoice_form"/>
+            <field name="arch" type="xml">
+                <sheet position="before">
+                    <field name="difference" invisible="1"/>
+                    <div class="alert alert-info" role="alert" style="margin-bottom:0px;"
+                         attrs="{'invisible': [('difference', '=', 0)]}">
+                        <field name="difference_msg" nolabel="1" widget="html" readonly="1"/>
+                    </div>
+                </sheet>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

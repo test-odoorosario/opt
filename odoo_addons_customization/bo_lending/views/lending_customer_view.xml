@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_customer_form" model="ir.ui.view">
+            <field name="name">lending_customer_form</field>
+            <field name="model">lending.customer</field>
+            <field name="arch" type="xml">
+                <form string="Cliente">
+                    <sheet>
+                        <h1>
+                            <field name="code" nolabel="1" placeholder="Codigo..."/>
+                        </h1>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="Prestadores">
+                                <group>
+                                    <field name="lender_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="code"/>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Planes">
+                                <group>
+                                    <field name="plan_ids" widget="many2many" nolabel="1">
+                                        <tree>
+                                            <field name="code"/>
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="lending_customer_tree" model="ir.ui.view">
+            <field name="name">lending_customer_tree</field>
+            <field name="model">lending.customer</field>
+            <field name="arch" type="xml">
+                <tree string="Clientes">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_customer_search" model="ir.ui.view">
+            <field name="name">lending_customer_search</field>
+            <field name="model">lending.customer</field>
+            <field name="arch" type="xml">
+                <search string="Cliente">
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Nombre"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_customer_action" model="ir.actions.act_window">
+            <field name="name">Cliente</field>
+            <field name="res_model">lending.customer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_customer_submenu"
+            name="Clientes"
+            action="lending_customer_action"
+            parent="lending_customer_menu"
+            sequence="35"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

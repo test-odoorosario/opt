@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_own_check_reconcile_form">
+            <field name="name">account.own.check.reconcile.form</field>
+            <field name="model">account.own.check</field>
+            <field name="inherit_id" ref="l10n_ar_account_check.account_own_check_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,handed,reconciled</attribute>
+                </field>
+                <field name="payment_type" position="after">
+                    <field name="reconcile_id" readonly="1"
+                           attrs="{'invisible': [('reconcile_id', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_own_check_reconcile_tree">
+            <field name="name">account.own.check.reconcile.tree</field>
+            <field name="model">account.own.check</field>
+            <field name="inherit_id" ref="l10n_ar_account_check.account_own_check_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-success">state in ['handed','collect','reconciled']</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="not_reconciled_checks_action">
+            <field name="name">Cheques sin conciliar</field>
+            <field name="res_model">account.own.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="l10n_ar_account_check.account_own_check_search"/>
+            <field name="domain">[('state', 'in', ['handed', 'collect'])]</field>
+        </record>
+
+        <menuitem id="not_reconciled_checks_menu" action="not_reconciled_checks_action" name="Cheques sin conciliar"
+                  parent="l10n_ar_account_check.treasury_own_checks_main_menu" sequence="50"/>
+
+        <act_window
+            id="own_check_reconcile_open_action"
+            name="Conciliar"
+            res_model="own.check.reconcile"
+            src_model="account.own.check"
+            view_mode="form"
+            view_id="own_check_reconcile_popup_form"
+            multi="True"
+            target="new"
+            key2="client_action_multi"
+            groups="l10n_ar_account_check.group_account_treasury_manager"
+        />
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

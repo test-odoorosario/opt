@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+    
+        <menuitem
+            id="lending_menu_root"
+            name="Prestaciones"
+            groups="bo_lending.group_user"
+            sequence="10"
+        />
+
+        <menuitem
+            id="lending_invoice_menu"
+            name="Facturacion"
+            parent="lending_menu_root"
+            groups="bo_lending.group_user"
+            sequence="1"
+        />
+
+        <menuitem
+            id="lending_rate_menu"
+            name="Tarifarios"
+            parent="lending_menu_root"
+            groups="bo_lending.group_rate"
+            sequence="40"
+        />
+
+        <menuitem
+            id="lending_customer_menu"
+            name="Clientes"
+            parent="lending_menu_root"
+            groups="bo_lending.group_user"
+            sequence="70"
+        />
+
+        <menuitem
+            id="lending_config_menu"
+            name="Configuracion"
+            parent="lending_menu_root"
+            groups="bo_lending.group_manager"
+            sequence="100"
+        />
+    
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_lending_kairos_line_user,lending_kairos_line_user,model_lending_kairos_line,bo_lending.group_user,1,0,0,0
+access_lending_kairos_line_manager,lending_kairos_line_manager,model_lending_kairos_line,bo_lending.group_manager,1,1,1,1
+access_lending_kairos_value_line_user,lending_kairos_value_line_user,model_lending_kairos_value_line,bo_lending.group_user,1,0,0,0
+access_lending_kairos_value_line_manager,lending_kairos_value_line_manager,model_lending_kairos_value_line,bo_lending.group_manager,1,1,1,1

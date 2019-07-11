@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <record id="lending_rate_update_wizard_form" model="ir.ui.view">
+            <field name="name">lending.rate.update.wizard.form</field>
+            <field name="model">lending.rate.update.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="prev_rate_id" invisible="1"/>
+                        <field name="name"/>
+                        <field name="global_percentage"/>
+                        <field name="line_ids" context="{'rate_id': prev_rate_id}">
+                            <tree editable="bottom">
+                                <field name="lending_id"/>
+                                <field name="variation_percentage"/>
+                                <field name="available_lending_ids" invisible="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Actualizar" type="object" name="create_rate" class="oe_highlight"/>
+                        o
+                        <button class="oe_link" special="cancel" string="Cancelar"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

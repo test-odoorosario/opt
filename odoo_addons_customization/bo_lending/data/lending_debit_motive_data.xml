@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data noupdate="1">
+
+        <record id="debit_motive_without_term" model="lending.debit.motive">
+            <field name="code">01</field>
+            <field name="name">Prestacion fuera de termino</field>
+            <field name="percentage">100</field>
+            <field name="is_re_invoice">True</field>
+        </record>
+
+        <record id="debit_motive_authorization" model="lending.debit.motive">
+            <field name="code">02</field>
+            <field name="name">Falta Autorizacion</field>
+            <field name="percentage">100</field>
+            <field name="is_re_invoice">True</field>
+        </record>
+        <record id="debit_motive_protocol" model="lending.debit.motive">
+            <field name="code">03</field>
+            <field name="name">Falta Informe / Protocolo</field>
+            <field name="percentage">100</field>
+            <field name="is_re_invoice">True</field>
+        </record>
+        <record id="debit_motive_affiliate" model="lending.debit.motive">
+            <field name="code">04</field>
+            <field name="name">Afiliado dado de baja</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_agreement_affiliate" model="lending.debit.motive">
+            <field name="code">05</field>
+            <field name="name">Falta conformidad  del afiliado</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_signature" model="lending.debit.motive">
+            <field name="code">06</field>
+            <field name="name">Falta Firma y/o Sello del Medico</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_document" model="lending.debit.motive">
+            <field name="code">07</field>
+            <field name="name">Sin documentacion Respaldatoria</field>
+            <field name="percentage">100</field>
+            <field name="is_re_invoice">True</field>
+        </record>
+        <record id="debit_motive_expired_order" model="lending.debit.motive">
+            <field name="code">08</field>
+            <field name="name">Orden medica vencida</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_amended_order" model="lending.debit.motive">
+            <field name="code">09</field>
+            <field name="name">Orden medica enmendada sin salvar</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_without_diagnosis" model="lending.debit.motive">
+            <field name="code">10</field>
+            <field name="name">Sin diagnostico</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_illegible" model="lending.debit.motive">
+            <field name="code">11</field>
+            <field name="name">Diagnostico ilegible</field>
+            <field name="percentage">100</field>
+        </record>
+        <record id="debit_motive_amount" model="lending.debit.motive">
+            <field name="code">12</field>
+            <field name="name">Diferencia de Valor según convenio</field>
+            <field name="percentage">0</field>
+            <field name="is_re_invoice">True</field>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

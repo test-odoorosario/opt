@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data noupdate="0">
+        <record id="group_lender" model="res.groups">
+            <field name="name">Menu para prestador</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+
+        <record id="lending_invoice_lender_rule" model="ir.rule">
+            <field name="name">Facturas</field>
+            <field name="model_id" ref="bo_lending.model_lending_invoice"/>
+            <field name="groups" eval="[(4, ref('group_lender'))]"/>
+            <field name="domain_force">['|',('lender_id','=',user.lender_id.id), ('lender_id','in',[p.id for p in user.lender_id.child_ids])]</field>
+        </record>
+
+        <record id="lending_lot_lender_rule" model="ir.rule">
+            <field name="name">Lotes</field>
+            <field ref="bo_lending.model_lending_lot" name="model_id"/>
+            <field name="domain_force">['|',('lender_id','=',user.lender_id.id), ('lender_id','in',[p.id for p in user.lender_id.child_ids])]</field>
+            <field name="groups" eval="[(4, ref('group_lender'))]"/>
+            <field eval="1" name="perm_unlink"/>
+            <field eval="1" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="1" name="perm_create"/>
+        </record>
+
+        <record id="lending_lender_lender_rule" model="ir.rule">
+            <field name="name">Prestadores</field>
+            <field ref="bo_lending.model_lending_lender" name="model_id"/>
+            <field name="domain_force">['|',('id','=',user.lender_id.id), ('id','in',[p.id for p in user.lender_id.child_ids])]</field>
+            <field name="groups" eval="[(4, ref('group_lender'))]"/>
+        </record>
+
+        <record id="lending_customer_lender_rule" model="ir.rule">
+            <field name="name">Clientes</field>
+            <field ref="bo_lending.model_lending_customer" name="model_id"/>
+            <field name="domain_force">[('id','=',user.customer_id.id)]</field>
+            <field name="groups" eval="[(4, ref('group_lender'))]"/>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

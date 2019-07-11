@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <menuitem
+            id="lending_medical_audit_menu"
+            name="Auditoría médica"
+            parent="bo_lending.lending_menu_root"
+            groups="lending_medical_audit.group_medical_audit,lending_medical_audit.group_dental_audit"
+            sequence="20"
+        />
+        <record id="bo_lending.lending_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('group_medical_audit')),(4,ref('group_dental_audit'))]"/>
+        </record>
+        <record id="bo_lending.lending_rate_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('group_medical_audit')),(4,ref('group_dental_audit'))]"/>
+        </record>
+        <record id="bo_lending.lending_nomenclator_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('bo_lending.group_rate'))]"/>
+        </record>
+        <record id="bo_lending.lending_rate_submenu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('bo_lending.group_rate'))]"/>
+        </record>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

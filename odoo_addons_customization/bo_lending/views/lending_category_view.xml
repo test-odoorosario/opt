@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+
+
+        <record id="lending_category_form" model="ir.ui.view">
+            <field name="name">lending_category_form</field>
+            <field name="model">lending.category</field>
+            <field name="arch" type="xml">
+                <form string="Categoria">
+                    <sheet>
+                        <h1>
+                            <field name="name" nolabel="1" placeholder="Nombre..."/>
+                        </h1>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="lending_category_tree" model="ir.ui.view">
+            <field name="name">lending_category_tree</field>
+            <field name="model">lending.category</field>
+            <field name="arch" type="xml">
+                <tree string="Categorias">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_category_search" model="ir.ui.view">
+            <field name="name">lending_category_search</field>
+            <field name="model">lending.category</field>
+            <field name="arch" type="xml">
+                <search string="Categoria">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_category_action" model="ir.actions.act_window">
+            <field name="name">Categoria</field>
+            <field name="res_model">lending.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_category_menu"
+            name="Categorias"
+            action="lending_category_action"
+            parent="lending_config_menu"
+            sequence="35"
+        />
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

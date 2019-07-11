@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <!-- FORM VIEW -->
+        <record model="ir.ui.view" id="retention_sicore_form_view">
+            <field name="name">retention_sicore_form_view</field>
+            <field name="model">retention.sicore</field>
+            <field name="arch" type="xml">
+                <form string="SICORE Retenenciones">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <group>
+                                <field name="date_from"/>
+                            </group>
+                            <group>
+                                <field name="date_to"/>
+                            </group>
+                            <field name="file" attrs="{'invisible': [('file', '=', False)]}" filename="filename"/>
+                            <field name="filename" invisible="True"/>
+                            <footer>
+                                <button name="generate_file"
+                                        type="object"
+                                        string="Generar"
+                                        icon="fa-gear"
+                                        colspan="1"
+                                />
+                            </footer>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- TREE VIEW -->
+        <record model="ir.ui.view" id="retention_sicore_tree_view">
+            <field name="name">retention_sicore_tree_view</field>
+            <field name="model">retention.sicore</field>
+            <field name="arch" type="xml">
+                <tree string="SICORE Retenciones">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="file" filename="filename"/>
+                    <field name="filename" invisible="True"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record model="ir.actions.act_window" id="retention_sicore_action">
+            <field name="name">SICORE Retenciones</field>
+            <field name="res_model">retention.sicore</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="retention_sicore_menu_view"
+                  name="SICORE Retenciones"
+                  parent="account.menu_finance_reports"
+                  action="retention_sicore_action"
+                  sequence="25"/>
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

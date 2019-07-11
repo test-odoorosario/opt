@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data noupdate="1">
+
+        <record model="print.check.configuration" id="print_check_configuration_base">
+            <field name="vertical_displacement">14.60</field>
+            <field name="amount_x">13.00</field>
+            <field name="amount_y">1.30</field>
+            <field name="issue_date_y">1.80</field>
+            <field name="issue_date_day_x">4.20</field>
+            <field name="issue_date_month_x">5.10</field>
+            <field name="issue_date_year_x">9.50</field>
+            <field name="payment_date_y">2.30</field>
+            <field name="payment_date_day_x">3.20</field>
+            <field name="payment_date_month_x">4.50</field>
+            <field name="payment_date_year_x">8.00</field>
+            <field name="partner_1_x">4.60</field>
+            <field name="partner_1_y">2.80</field>
+            <field name="partner_characters">65</field>
+            <field name="two_partner_lines">True</field>
+            <field name="partner_2_x">3.40</field>
+            <field name="partner_2_y">3.20</field>
+            <field name="amount_text_1_x">5.80</field>
+            <field name="amount_text_1_y">3.40</field>
+            <field name="amount_characters">60</field>
+            <field name="amount_text_2_x">4.10</field>
+            <field name="amount_text_2_y">3.60</field>
+        </record>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

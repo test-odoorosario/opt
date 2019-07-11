@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+
+    <data>
+
+        <record id="lending_kairos_line_form_view" model="ir.ui.view">
+            <field name="name">lending_kairos_line_form_view</field>
+            <field name="model">lending.kairos.line</field>
+            <field name="arch" type="xml">
+                <form string="Medicamento">
+                    <sheet>
+                        <group readonly="1">
+                            <group>
+                                <field name="lending_id" string="Medicamento"/>
+                                <field name="code" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="value"/>
+                            </group>
+                        </group>
+                        <group readonly="1">
+                            <group>
+                                <field name="description_drug"/>
+                                <field name="description_presentation"/>
+                            </group>
+                            <group>
+                                <field name="description_product"/>
+                                <field name="description_laboratory"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Valores">
+                                <field name="value_line_ids" nolabel="1" readonly="1">
+                                    <tree>
+                                        <field name="date"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lending_kairos_line_tree_view" model="ir.ui.view">
+            <field name="name">lending_kairos_line_tree_view</field>
+            <field name="model">lending.kairos.line</field>
+            <field name="arch" type="xml">
+                <tree string="Medicamentos">
+                    <field name="lending_id" string="Medicamento"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lending_kairos_line_search_view" model="ir.ui.view">
+            <field name="name">lending_kairos_line_search_view</field>
+            <field name="model">lending.kairos.line</field>
+            <field name="arch" type="xml">
+                <search string="Prestaciones">
+                    <field name="lending_id" string="Medicamento"/>
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Nombre"/>
+                    <field name="date" string="Fecha vigencia"/>
+                    <field name="value"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="lending_kairos_line_action" model="ir.actions.act_window">
+            <field name="name">Kairos</field>
+            <field name="res_model">lending.kairos.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lending_kairos_line_menu"
+            action="lending_kairos_line_action"
+            parent="bo_lending.lending_rate_menu"
+            groups="bo_lending.group_rate"
+            sequence="100"
+        />
+
+    </data>
+
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

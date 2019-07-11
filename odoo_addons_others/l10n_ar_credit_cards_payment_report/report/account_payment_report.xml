@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<openerp>
+    <data>
+
+        <template id="account_payment_coupon_report" inherit_id="l10n_ar_account_payment_report.report_account_payment">
+            <xpath expr="//t[@t-if='o.retention_ids']" position="before">
+                <t t-if= "o.purchase_credit_card_line_ids">
+                    <br/>
+                    <h4>
+                        <div class="text-center">
+                            <strong>DETALLES DE TARJETAS</strong>
+                        </div>
+                    </h4>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Tarjeta</th>
+                                <th>Cuotas</th>
+                                <th>Descripcion</th>
+                                <th class="text-right">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr t-foreach="o.purchase_credit_card_line_ids" t-as="l">
+                                <td>
+                                    <span t-field="l.credit_card_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.fees"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.description"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-options='{"widget": "monetary", "display_currency": l.currency_id}'
+                                          t-field="l.amount" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-xs-4 pull-right">
+                            <table class="table table-condensed">
+                                <tr class="border-black">
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-right">
+                                        <t t-set="total_cards" t-value="sum(l.amount for l in o.purchase_credit_card_line_ids)"/>
+                                        <span t-esc="total_cards"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>
+
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<openerp>
+    <data>
+        <record id="bank_card_form" model="ir.ui.view">
+            <field name="name">bank_card_form</field>
+            <field name="model">bank.card</field>
+            <field name="arch" type="xml">
+                <form string="Tarjeta">
+                    <sheet>
+                        <group>
+                            <h1>
+                                <label
+                                    for="name"
+                                    class="oe_edit_only"
+                                    style="font-weight: bold;"
+                                />
+                                <field name="name"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="bank_account_id"/>
+                                <field name="account_id"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Cuotas">
+                            <field
+                                name="bank_card_fee_ids"
+                                nolabel="1"
+                                context="{'default_bank_card_id': active_id}"
+                            >
+                                <tree
+                                    editable="bottom"
+                                >
+                                    <field name="name"/>
+                                    <field name="bank_card_id" invisible="1"/>
+                                    <field name="fee_quantity"/>
+                                    <field name="active"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4-->
