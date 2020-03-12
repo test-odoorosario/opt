@@ -51,7 +51,7 @@ imagesize==0.7.1
 vatnumber==1.2
 validate_email
 pandas == 0.18.0
-psutil==2.1.1
+psutil==5.6.6
 mercurial==3.2.2
 Pygments==2.0.2
 greenlet==0.4.7
