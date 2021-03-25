@@ -44,7 +44,7 @@ python-dateutil==1.5
 git+https://github.com/PyCQA/pylint.git@f83dd399#egg=pylint
 unittest2==0.5.1
 Mako==1.0.0
-PyYAML==3.11
+PyYAML==5.4
 lxml==3.3.5
 vobject==0.6.6
 imagesize==0.7.1
