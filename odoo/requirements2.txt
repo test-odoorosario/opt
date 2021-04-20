@@ -56,7 +56,7 @@ mercurial==3.2.2
 Pygments==2.0.2
 greenlet==0.4.7
 decorator==3.4.0
-Werkzeug==0.9.6
+Werkzeug==0.15.3
 pyparsing==1.5.7
 IPy
 psycogreen==1.0
