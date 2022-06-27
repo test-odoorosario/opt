@@ -1,5 +1,5 @@
 unidecode
-reportlab==3.1.44
+reportlab==3.5.55
 pydot==1.0.2
 cssutils >= 1.0.1
 polib==1.0.7
