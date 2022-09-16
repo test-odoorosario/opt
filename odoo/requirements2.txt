@@ -43,7 +43,7 @@ translate-toolkit==1.13.0
 python-dateutil==1.5
 git+https://github.com/PyCQA/pylint.git@f83dd399#egg=pylint
 unittest2==0.5.1
-Mako==1.0.0
+Mako==1.2.2
 PyYAML==3.11
 lxml==3.3.5
 vobject==0.6.6
