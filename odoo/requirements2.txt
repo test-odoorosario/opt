@@ -6,7 +6,7 @@ polib==1.0.7
 six==1.7.3
 requests==2.6.0
 wsgiref==0.1.2
-Pillow==2.5.1
+Pillow==9.3.0
 MarkupSafe==0.23
 gevent==1.0.2
 whichcraft
